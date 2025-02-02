@@ -1,6 +1,4 @@
 from django.shortcuts import render
-#Import HTTP response
-from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
@@ -11,10 +9,3 @@ def home(request):
         'name': 'Ricardo Nogueira'
     })
 
-def about(request):
-    #return HTTP Response
-    return HttpResponse('About')
-
-def contact(request):
-    #return HTTP Response
-    return HttpResponse('Contact')
