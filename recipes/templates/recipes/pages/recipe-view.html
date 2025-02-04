@@ -1,0 +1,11 @@
+<!-- The inherage comes from global home.html page-->
+{% extends 'global/base.html'%}
+<!-- Extends global/base.html page-->
+
+{%block title%}Alterar |{% endblock title%}
+
+{% block content %}
+<div class="main-content main-content-detail container">
+  {% include 'recipes/partials/recipe.html' %}
+</div>
+{% endblock content %}

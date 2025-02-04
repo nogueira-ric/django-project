@@ -4,10 +4,11 @@
 
 from django.urls import path
 #Must import views from app recipes
-from recipes.views import home
-
+from . import views
 
 urlpatterns = [
-    path('', home),
+    path('', views.home),
+    #Passe the recipe ID to render the recipe
+    path('recipes/<int:id>/', views.recipe),
     
 ]
