@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #Adding apps created
+    # Adding apps created
     'recipes'
 ]
 
@@ -58,8 +58,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
 
-            ##By default Django load the templates based on its names
-            ##To avoid duplicate file names, you user the directory to add more template paths:
+            # By default Django load the templates based on its names
+            # To avoid duplicate file names, you user the directory to add more template paths:
             BASE_DIR / 'base_templates',
         ],
         'APP_DIRS': True,
@@ -123,6 +123,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'base_static',
+]
+
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

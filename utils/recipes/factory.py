@@ -8,14 +8,15 @@ def rand_ratio():
     return randint(840, 900), randint(473, 573)
 
 
-fake = Faker('pt_BR')
+fake = Faker('en')
 # print(signature(fake.random_number))
 
 
 def make_recipe():
     return {
-        'title': fake.sentence(nb_words=3),
-        'description': fake.sentence(nb_words=10),
+        'id': fake.random_number(digits=2, fix_len=True),
+        'title': fake.sentence(nb_words=6),
+        'description': fake.sentence(nb_words=12),
         'preparation_time': fake.random_number(digits=2, fix_len=True),
         'preparation_time_unit': 'Minutes',
         'servings': fake.random_number(digits=2, fix_len=True),
