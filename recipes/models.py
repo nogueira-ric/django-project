@@ -8,6 +8,10 @@ from django.contrib.auth.models import User  # Using the Django's user table
 class Category(models.Model):
     name = models.CharField(max_length=65)
 
+    # This function returns the category name in the admin area instead of the object ID.
+    def __str__(self):
+        return self.name
+
 
 class Recipe(models.Model):
     title = models.CharField(max_length=65)
@@ -30,3 +34,7 @@ class Recipe(models.Model):
     # Using the Django's user table
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True)
+
+    # This function returns the category name in the admin area instead of the object ID.
+    def __str__(self):
+        return self.title

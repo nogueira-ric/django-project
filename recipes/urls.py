@@ -4,7 +4,7 @@
 
 from django.urls import path
 # Must import views from app recipes
-from . import views
+from recipes import views
 
 # app_name creates shortcut to recipes-recipe
 
@@ -16,6 +16,8 @@ urlpatterns = [
     path('', views.home, name="home"),
     # Passe the recipe ID to render the recipe
     # Using the app_name described above.
+    path('recipes/category/<int:category_id>/',
+         views.category, name="category"),
     path('recipes/<int:id>/', views.recipe, name="recipe"),
 
 ]

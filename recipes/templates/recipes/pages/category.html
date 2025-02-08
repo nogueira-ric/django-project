@@ -1,0 +1,13 @@
+<!-- The inherage comes from global home.html page -->
+{% extends 'global/base.html' %}
+<!-- Extends global/base.html page -->
+
+{%block title%}Category |{% endblock title%}
+
+{% block content %}
+  {<div class="main-content main-content-list container">
+    {% for recipe in recipes%}
+    {% include 'recipes/partials/recipe.html' %}
+    {%endfor%}
+  </div>}
+{% endblock %}
