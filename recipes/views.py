@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 from utils.recipes.factory import make_recipe
 from recipes.models import Recipe  # Queryset API
-
 
 # Create your views here.
 
@@ -21,22 +20,27 @@ def home(request):
     })
 
 
-def recipe(request, id):
-    # Rendering web applications.
-    # recipes/ points to the path of the templates, such as /recipes or global/.
-    # This allows you to reuse files with the same name by simply pointing to the template path.
-    return render(request, 'recipes/pages/recipe-view.html', context={
-        'recipe': make_recipe(),
-        'is_detail_page': True,
+def category(request, category_id):
+    # As the category ID is a PK in the recipe (templates), you reference it as category__id and pass the category_id field.
+    recipes = get_list_or_404(Recipe.objects.filter(
+        category__id=category_id,
+        is_published=True
+    ).order_by('id'))
+
+    return render(request, 'recipes/pages/category.html', context={
+        'recipes': recipes,
+        # Adding the category name in the browser to improve the search engine.
+        'title': f'{recipes[0].category.name} - Category | ',
     })
 
 
-def category(request, category_id):
-    # As the category ID is a PK in the recipe (templates), you reference it as category__id and pass the category_id field.
-    recipes = Recipe.objects.filter(
-        category__id=category_id,
-        is_published=True
-    ).order_by('id')
-    return render(request, 'recipes/pages/category.html', context={
-        'recipes': recipes,
+def recipe(request, id):
+    # Rendering web applications.
+    recipe = get_object_or_404(Recipe, pk=id, is_published=True,)
+
+    # recipes/ points to the path of the templates, such as /recipes or global/.
+    # This allows you to reuse files with the same name by simply pointing to the template path.
+    return render(request, 'recipes/pages/recipe-view.html', context={
+        'recipe': recipe,
+        'is_detail_page': True,
     })
