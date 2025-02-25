@@ -1,10 +1,9 @@
-from django.test import TestCase
-from django.urls import reverse,resolve
+from django.urls import reverse,resolve 
 from recipes import views
-from recipes.models import Recipe, Category
-from django.contrib.auth.models import User
+from .test_recipe_base import RecipeTestBase
 
-class RecipeViewTest(TestCase):
+class RecipeViwerTest(RecipeTestBase):
+    
     def test_recipe_home_views_function_is_correct(self):
         view = resolve(reverse('recipes:home'))
         self.assertIs(view.func, views.home)
@@ -23,30 +22,7 @@ class RecipeViewTest(TestCase):
             '<h1> No Recipes found </h1>',
             response.content.decode('utf-8')
             )
-
     def test_recipe_load_template_loads_recipes(self):
-        category = Category.objects.create(name='Category-test')
-        author = User.objects.create_user(
-            first_name = 'user',
-            last_name = 'name',
-            username = 'user1',
-            password = '123455',
-            email = 'user@user.com',
-        )
-        recipe = Recipe.objects.create(
-            category = category,
-            author = author,
-            title = 'Recipe Title',
-            description = 'Recipe Description',
-            slug = 'recipe-slug',
-            preparation_time = 10,
-            preparation_time_unit = 'Minutes',
-            servings = '4',
-            servings_unit = 'people',
-            preparation_steps = 'Recipe Preparation Steps',
-            preparation_steps_is_html = False,
-            is_published = True,
-        ) 
         response = self.client.get(reverse('recipes:home'))
         content = response.content.decode('utf-8')
         self.assertIn('Recipe Title', content) 
